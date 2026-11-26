@@ -1,0 +1,22 @@
+# Build / output
+out/
+*.class
+
+# XAMPP portable (cualquier carpeta xampp)
+xampp/
+xampp*/
+
+# IDE
+.vscode/*
+!.vscode/settings.json
+.idea/
+*.iml
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Logs / temp
+*.log
+*.pid
+*.err

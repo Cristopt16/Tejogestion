@@ -20,9 +20,9 @@ public class ControladorVenta {
      */
     public ComprobanteVenta procesarVenta(Venta venta) throws SQLException {
         ValidacionVenta.validarItemsVenta(venta.getDetalles());
-        ultimasAlertas.clear();
 
         ComprobanteVenta comprobante = ventaBD.insertarVentaTransaccional(venta);
+        ultimasAlertas.clear();
 
         for (DetalleVenta det : venta.getDetalles()) {
             AlertaBajoInventario alerta = servicioInv.evaluarStockPostVenta(det.getRefProducto());

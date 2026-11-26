@@ -1,46 +1,10 @@
 -- ==========================================================
 -- DATOS SEMILLA DE PRUEBA (TejoGestion)
+-- Este script SOLO inserta datos semilla; NO crea tablas.
+-- Prerrequisitos: ejecutar en orden tejogestion.sql,
+--   02_mod2_inventario_ventas.sql, 03_mod3_torneos.sql.
 -- ==========================================================
-CREATE DATABASE IF NOT EXISTS tejogestion CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE tejogestion;
-
--- Tablas base del Sprint 1 (creación condicional para ejecución idempotente)
-CREATE TABLE IF NOT EXISTS ROL (
-    id_rol INT(11) NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    CONSTRAINT pk_rol PRIMARY KEY (id_rol),
-    CONSTRAINT uk_rol_nombre UNIQUE (nombre)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS USUARIO (
-    id_usuario INT(11) NOT NULL AUTO_INCREMENT,
-    ref_rol INT(11) NOT NULL,
-    nombre VARCHAR(100) NOT NULL,
-    usuario VARCHAR(50) NOT NULL,
-    contrasena VARCHAR(100) NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Activo',
-    CONSTRAINT pk_usuario PRIMARY KEY (id_usuario),
-    CONSTRAINT uk_usuario_login UNIQUE (usuario),
-    CONSTRAINT fk_usuario_rol FOREIGN KEY (ref_rol)
-        REFERENCES ROL(id_rol) ON UPDATE CASCADE ON DELETE RESTRICT
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS CANCHA (
-    id_cancha INT(11) NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL,
-    estado VARCHAR(20) NOT NULL DEFAULT 'Disponible',
-    CONSTRAINT pk_cancha PRIMARY KEY (id_cancha),
-    CONSTRAINT uk_cancha_nombre UNIQUE (nombre)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-CREATE TABLE IF NOT EXISTS CLIENTE (
-    id_cliente INT(11) NOT NULL AUTO_INCREMENT,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NULL,
-    telefono VARCHAR(20) NOT NULL,
-    correo VARCHAR(120) NULL,
-    CONSTRAINT pk_cliente PRIMARY KEY (id_cliente)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Roles base
 INSERT IGNORE INTO ROL (id_rol, nombre) VALUES
